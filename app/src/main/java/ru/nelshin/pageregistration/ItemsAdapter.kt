@@ -1,6 +1,7 @@
 package ru.nelshin.pageregistration
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemsAdapter(var items: List<Item>, var context: Context): RecyclerView.Adapter<ItemsAdapter.MyViewHolder>() {
+class ItemsAdapter(var items: List<Item>, var context: Context) :
+    RecyclerView.Adapter<ItemsAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -17,7 +19,7 @@ class ItemsAdapter(var items: List<Item>, var context: Context): RecyclerView.Ad
         val title: TextView = view.findViewById(R.id.item_list_title)
         val desc: TextView = view.findViewById(R.id.item_list_desc)
         val price: TextView = view.findViewById(R.id.item_list_price)
-//        val buttonListTitle: Button = view.findViewById(R.id.item_list_button)
+        val buttonListTitle: Button = view.findViewById(R.id.item_list_button)
 
     }
 
@@ -42,5 +44,15 @@ class ItemsAdapter(var items: List<Item>, var context: Context): RecyclerView.Ad
         )
 
         holder.image.setImageResource(imageId)
+
+        holder.buttonListTitle.setOnClickListener {
+            val intent = Intent(context, ItemActivity::class.java)
+
+            intent.putExtra("itemTitle", items[position].title)
+            intent.putExtra("itemText", items[position].text)
+            intent.putExtra("itemImage", items[position].image)
+
+            context.startActivity(intent)
+        }
     }
 }
