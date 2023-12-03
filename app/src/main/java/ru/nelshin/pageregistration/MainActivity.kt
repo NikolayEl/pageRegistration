@@ -46,10 +46,10 @@ class MainActivity : AppCompatActivity() {
             else if (login.length <= 3)
                 Toast.makeText(
                     this,
-                    "Имя пользователя должно быть больше 3 симоволов, попробуйте снова.",
+                    "Имя пользователя должно быть больше 3 букв, попробуйте снова.",
                     Toast.LENGTH_LONG
                 ).show()
-            else if (!(email.contains('@') && email.contains('.')))
+            else if (!(email.contains('@') && email.contains('.')) || email.length <= 6)
                 Toast.makeText(
                     this,
                     "такого e-mail не существует, введите заново",
